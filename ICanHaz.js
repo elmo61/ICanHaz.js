@@ -517,7 +517,28 @@ FORKED to https://github.com/elmo61/ICanHaz.js to able to enable overwritting of
                 for (i = 0, l = trash.length; i < l; i++) {
                     trash[i].parentNode.removeChild(trash[i]);
                 }
+            },
+
+            build: function (TemplateName, data) {
+                if (ich[TemplateName]) {
+                    //This template already exists so we can just use it!
+                } else {
+                    //if template doesnt exist then load it
+                    $.ajax({
+                        url: "../API/Templates.svc/?TemplateName=" + TemplateName,
+                        async: false,
+                        success: function (data) {
+                            ich.addTemplate(TemplateName, JSON.parse(data).TestString);
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            AjaxError2(xhr, textStatus, errorThrown);
+                        }
+                    });
+                }
+
+                return ich[TemplateName](data)
             }
+
         };
 
         // Use CommonJS if applicable
