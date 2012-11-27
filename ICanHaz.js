@@ -525,10 +525,10 @@ FORKED to https://github.com/elmo61/ICanHaz.js to able to enable overwritting of
                 } else {
                     //if template doesnt exist then load it
                     $.ajax({
-                        url: "../API/Templates.svc/?TemplateName=" + TemplateName,
+                        url: ApplicationPath + "/API/Templates.svc/?TemplateName=" + TemplateName,
                         async: false,
                         success: function (data) {
-                            ich.addTemplate(TemplateName, JSON.parse(data).TestString);
+                            ich.addTemplate(TemplateName, JSON.parse(data).HTML);
                         },
                         error: function (xhr, textStatus, errorThrown) {
                             AjaxError2(xhr, textStatus, errorThrown);
